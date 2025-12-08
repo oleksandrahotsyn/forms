@@ -1,14 +1,20 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
+import type { Character } from "./types/character";
+
 function App() {
-  const [character, setCharacter] = useState(null);
-  const [counter, setCounter] = useState(0);
+  const [character, setCharacter] = useState<Character | null>(null);
+  const [counter, setCounter] = useState<number>(0);
 
   useEffect(() => {
-    axios
-      .get("http://swapi.info/api/people/5")
-      .then(({ data }) => setCharacter(data));
+    async function getCharacter() {
+      const { data } = await axios.get<Character>(
+        "http://swapi.info/api/people/5"
+      );
+      setCharacter(data);
+    }
+    getCharacter();
   }, []);
 
   useEffect(() => {
