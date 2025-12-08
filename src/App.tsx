@@ -11,6 +11,10 @@ function App() {
       .then(({ data }) => setCharacter(data));
   }, []);
 
+  useEffect(() => {
+    console.log("Counter:", counter);
+  }, []);
+
   return (
     <>
       <h1>Effect</h1>
